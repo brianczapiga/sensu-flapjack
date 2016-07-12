@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 gem 'redis'
-gem 'oj'
-gem 'json'
+gem 'flapjack'

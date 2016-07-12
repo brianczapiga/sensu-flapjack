@@ -3,7 +3,9 @@
 require 'json'
 require 'optparse'
 require 'redis'
-require 'oj'
+require 'flapjack'
+require 'flapjack/configuration'
+require 'flapjack/data/event'
 
 options = {
   host: '127.0.0.1',
@@ -49,8 +51,6 @@ end
 jsonInput = $stdin.read
 event = JSON.parse(jsonInput)
 
-redis = Redis.new(options)
-
 SEVERITIES = ['ok', 'warning', 'critical', 'unknown']
 client = event['client']
 check = event['check']
@@ -79,4 +79,6 @@ flapjack_event = {
   tags: tags
 }
 
-redis.lpush(options[:channel], Oj.dump(flapjack_event, :mode => :compat, :time_format => :ruby, :indent => 0))
+Flapjack::RedisProxy.config = options
+Flapjack::Data::Event.push(options[:channel], flapjack_event)
+Flapjack.redis.quit
