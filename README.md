@@ -1,5 +1,25 @@
 # Sensu-Flapjack Pipe Handler
 
+## Installation
+
+- Clone:
+```
+$ git clone git@github.com:brianczapiga/sensu-flapjack.git
+```
+- Select version:
+```
+$ cd sensu-flapjack
+$ git tag
+v1.6.0
+v2.0.0
+$ git checkout v1.6.0
+```
+- Install gems:
+```
+$ gem install bundler
+$ bundle install
+```
+
 ## Usage
 
 ```
